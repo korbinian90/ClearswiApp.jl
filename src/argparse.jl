@@ -5,7 +5,7 @@ function getargs(args::AbstractVector)
     s = ArgParseSettings(
         exc_handler=exception_handler,
         add_version=true,
-        version="v1.0.0",
+        version="v0.1.0",
         )
     @add_arg_table! s begin
         "--magnitude", "-m"
@@ -45,8 +45,18 @@ function getargs(args::AbstractVector)
             nargs = +
             default = [4,4,0]
         "--phase-scaling-type"
-            help = """"""
-
+            help = """tanh | negativetanh | positive | negative | triangular
+            Select the type of phase scaling. positive or negative with a 
+            strength of 3-6 is used in standard SWI."""
+            default = "tanh"
+        "--phase-scaling-strength"
+            help = """Sets the phase scaling strength. Corresponds to power
+            values for positive, negative and triangular phase scaling type."""
+            default = 4
+        "--writesteps"
+            help = """Set to the path of a folder, if intermediate steps should
+            be saved."""
+            default = nothing
     end
     return parse_args(args, s)
 end
