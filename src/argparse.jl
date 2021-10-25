@@ -41,7 +41,7 @@ function getargs(args::AbstractVector)
             default = "laplacian"
         "--filter-size"
             help = """Size for the high-pass phase filter in voxels. Can be
-                given as <x> <y> <z> or in array syntax (e.g. [2.2 3.1, 0],
+                given as <x> <y> <z> or in array syntax (e.g. [2.2,3.1,0],
                 which is effectively a 2D filter)."""
             nargs = +
             default = [4,4,0]
@@ -119,16 +119,4 @@ function getTEs(settings, neco, echoes)
         TEs = TEs[echoes]
     end
     return TEs
-end
-
-function saveconfiguration(writedir, settings, args)
-    writedir = abspath(writedir)
-    open(joinpath(writedir, "settings_clearswi.txt"), "w") do io
-        for (fname, val) in settings
-            if !(typeof(val) <: AbstractArray)
-                println(io, "$fname: " * string(val))
-            end
-        end
-        println(io, """Arguments: $(join(args, " "))""")
-    end
 end

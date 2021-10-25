@@ -17,4 +17,6 @@ function julia_main()::Cint
     return 0
 end
 
+export clearswi_main
+
 end
