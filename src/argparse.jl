@@ -102,7 +102,7 @@ end
 function getTEs(settings, neco, echoes)
     if isempty(settings["echo-times"])
         if neco == 1 || length(echoes) == 1
-            return 1
+            return [1]
         else
             error("multi-echo data is used, but no echo times are given. Please specify the echo times using the -t option.")
         end
@@ -117,6 +117,9 @@ function getTEs(settings, neco, echoes)
     end
     if length(TEs) == neco
         TEs = TEs[echoes]
+    end
+    if !(TEs isa AbstractVector)
+        TEs = [TEs]
     end
     return TEs
 end

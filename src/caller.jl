@@ -49,13 +49,12 @@ function clearswi_main(args)
                     elseif settings["mag-combine"][1] == "average"
                         :average
                     elseif settings["mag-combine"][1] == "echo"
-                        parse(Int, last(settings["mag-combine"]))
+                        :echo => parse(Int, last(settings["mag-combine"]))
                     elseif settings["mag-combine"][1] == "SE"
-                        parse(Float32, last(settings["mag-combine"]))
+                        :SE => parse(Float32, last(settings["mag-combine"]))
                     else
                         error("The setting for mag-combine is not valid: $(settings["mag-combine"])")
                     end
-
     mag_sens =  if settings["mag-sensitivity-correction"] == "on"
                     nothing
                 elseif settings["mag-sensitivity-correction"] == "off"
