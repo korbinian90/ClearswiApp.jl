@@ -43,8 +43,8 @@ function getargs(args::AbstractVector)
             help = """Size for the high-pass phase filter in voxels. Can be
                 given as <x> <y> <z> or in array syntax (e.g. [2.2,3.1,0],
                 which is effectively a 2D filter)."""
-            nargs = +
-            default = [4,4,0]
+            nargs = '+'
+            default = ["[4,4,0]"]
         "--phase-scaling-type"
             help = """tanh | negativetanh | positive | negative | triangular
                 Select the type of phase scaling. positive or negative with a
@@ -54,7 +54,7 @@ function getargs(args::AbstractVector)
             help = """Sets the phase scaling strength. Corresponds to power
                 values for positive, negative and triangular phase scaling
                 type."""
-            default = 4
+            default = "4"
         "--echoes", "-e"
             help = "Load only the specified echoes from disk"
             default = [":"]

@@ -1,6 +1,6 @@
 function clearswi_main(args)
     settings = getargs(args)
-    keyargs = Dict()
+    if isnothing(settings) return end
     
     writedir = settings["output"]
     filename = "clearswi"
@@ -11,10 +11,10 @@ function clearswi_main(args)
 
     mkpath(writedir)
 
-    TEs = getTEs(settings, neco, echoes) 
     mag = readmag(settings["magnitude"]; mmap=!settings["no-mmap"])
     phase = readphase(settings["phase"]; mmap=!settings["no-mmap"], rescale=!settings["no-phase-rescale"])
     hdr = header(mag)
+    neco = size(mag, 4)
 
     ## Echoes for unwrapping
     echoes = try
@@ -27,16 +27,15 @@ function clearswi_main(args)
         end
     end
     settings["verbose"] && println("Echoes are $echoes")
-
-    keyargs[:TEs] = getTEs(settings, neco, echoes)
-    settings["verbose"] && println("TEs are $(keyargs[:TEs])")
+    
+    TEs = getTEs(settings, neco, echoes)
+    settings["verbose"] && println("TEs are $TEs")
 
     ## Error messages
-    if 1 < length(echoes) && length(echoes) != length(keyargs[:TEs])
-        error("Number of chosen echoes is $(length(echoes)) ($neco in .nii data), but $(length(keyargs[:TEs])) TEs were specified!")
+    if 1 < length(echoes) && length(echoes) != length(TEs)
+        error("Number of chosen echoes is $(length(echoes)) ($neco in .nii data), but $(length(TEs)) TEs were specified!")
     end
     
-    neco = size(mag, 4)
     echoes = getechoes(settings, neco)
     if echoes != 1:neco
         phase = phase[:,:,:,echoes]
@@ -45,14 +44,14 @@ function clearswi_main(args)
     end
 
     data = Data(mag, phase, hdr, TEs)
-    mag_combine =   if settings["mag-combine"] == "SNR"
+    mag_combine =   if settings["mag-combine"][1] == "SNR"
                         :SNR
-                    elseif settings["mag-combine"] == "average"
+                    elseif settings["mag-combine"][1] == "average"
                         :average
-                    elseif startswith(settings["mag-combine"], "echo ")
-                        parse(Int, last(settings["mag-combine"].split()))
-                    elseif startswith(settings["mag-combine"], "SE ")
-                        parse(Float32, last(settings["mag-combine"].split()))
+                    elseif settings["mag-combine"][1] == "echo"
+                        parse(Int, last(settings["mag-combine"]))
+                    elseif settings["mag-combine"][1] == "SE"
+                        parse(Float32, last(settings["mag-combine"]))
                     else
                         error("The setting for mag-combine is not valid: $(settings["mag-combine"])")
                     end
@@ -76,7 +75,7 @@ function clearswi_main(args)
     phase_unwrap = Symbol(settings["unwrapping-algorithm"])
     phase_hp_σ = eval(Meta.parse(join(settings["filter-size"], " ")))
     phase_scaling_type = Symbol(settings["phase-scaling-type"])
-    phase_scaling_strength = try parse(Int, settings["phase_scaling_strength"]) catch; parse(Float32, settings["phase_scaling_strength"]) end
+    phase_scaling_strength = try parse(Int, settings["phase-scaling-strength"]) catch; parse(Float32, settings["phase-scaling-strength"]) end
     writesteps = settings["writesteps"]
 
     options = Options(;mag_combine, mag_sens, mag_softplus, phase_unwrap, phase_hp_σ, phase_scaling_type, phase_scaling_strength, writesteps)
