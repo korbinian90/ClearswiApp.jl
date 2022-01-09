@@ -3,6 +3,7 @@ module ClearswiApp
 using ArgParse
 using MriResearchTools
 using CLEARSWI
+using FFTW
 
 include("argparse.jl")
 include("caller.jl")
