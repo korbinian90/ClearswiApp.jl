@@ -1,11 +1,11 @@
-function getargs(args::AbstractVector)
+function getargs(args::AbstractVector, version)
     if isempty(args)
         args = ["--help"]
     end
     s = ArgParseSettings(
         exc_handler=exception_handler,
         add_version=true,
-        version="v0.1.0",
+        version="v$version",
         )
     @add_arg_table! s begin
         "--magnitude", "-m"
@@ -122,4 +122,17 @@ function getTEs(settings, neco, echoes)
         TEs = [TEs]
     end
     return TEs
+end
+
+function saveconfiguration(writedir, settings, args, version)
+    writedir = abspath(writedir)
+    open(joinpath(writedir, "settings_romeo.txt"), "w") do io
+        for (fname, val) in settings
+            if !(typeof(val) <: AbstractArray)
+                println(io, "$fname: " * string(val))
+            end
+        end
+        println(io, """Arguments: $(join(args, " "))""")
+        println(io, "RomeoApp version: $version")
+    end
 end

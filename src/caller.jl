@@ -1,5 +1,7 @@
 function clearswi_main(args)
-    settings = getargs(args)
+    version = "0.1.3"
+
+    settings = getargs(args, version)
     if isnothing(settings) return end
     
     writedir = settings["output"]
@@ -10,6 +12,7 @@ function clearswi_main(args)
     end
 
     mkpath(writedir)
+    saveconfiguration(writedir, settings, args, version)
 
     mag = readmag(settings["magnitude"]; mmap=!settings["no-mmap"])
     phase = readphase(settings["phase"]; mmap=!settings["no-mmap"], rescale=!settings["no-phase-rescale"])
