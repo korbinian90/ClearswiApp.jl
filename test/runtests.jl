@@ -48,7 +48,7 @@ configurations_se(pm) = [
     [pm..., "--mag-sensitivity-correction", "off"],
     [pm..., "--mag-softplus-scaling", "off"],
     [pm..., "--unwrapping-algorithm", "romeo"],
-    [pm..., "--unwrapping-algorithm", "laplacianslice"],
+    #[pm..., "--unwrapping-algorithm", "laplacianslice"], # laplacianslice currently unstable
     [pm..., "--filter-size", "[2,2,3]"],
     [pm..., "--phase-scaling-type", "negativetanh"],
     [pm..., "--phase-scaling-type", "positive"],

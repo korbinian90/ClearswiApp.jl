@@ -1,7 +1,7 @@
 name = "ClearswiApp"
 uuid = "05b4817b-e4a0-4589-8b6a-5b9ef9b94bee"
 authors = ["Korbinian Eckstein korbinian90@gmail.com"]
-version = "1.0.2"
+version = "1.1.0"
 
 [deps]
 ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
@@ -13,5 +13,5 @@ MriResearchTools = "557dad86-b9bd-4533-8525-1a39684d020f"
 ArgParse = "1"
 CLEARSWI = "0.3"
 FFTW = "1.4.5"
-MriResearchTools = "0.6, 0.7"
+MriResearchTools = "0.6, 0.7, 0.8"
 julia = "1.5"
