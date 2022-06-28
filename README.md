@@ -16,7 +16,7 @@ Please cite [CLEAR-SWI NeuroImage](https://doi.org/10.1016/j.neuroimage.2021.118
 
    Please install Julia using the binaries from this page https://julialang.org. (Julia 1.5 or newer is required, some package managers install outdated versions)
 
-2. Install RomeoApp
+2. Install ClearswiApp
 
    Start Julia (Type julia in the command line or start the installed Julia executable)
 

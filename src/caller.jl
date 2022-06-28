@@ -1,5 +1,5 @@
 function clearswi_main(args)
-    version = "1.0.1"
+    version = "1.2.0"
 
     settings = getargs(args, version)
     if isnothing(settings) return end
