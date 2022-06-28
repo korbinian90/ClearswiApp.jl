@@ -11,6 +11,10 @@ function clearswi_main(args)
         writedir = dirname(writedir)
     end
 
+    if endswith(settings["phase"], ".gz") || endswith(settings["magnitude"], ".gz")
+        settings["no-mmap"] = true
+    end
+
     mkpath(writedir)
     saveconfiguration(writedir, settings, args, version)
 
