@@ -1,3 +1,4 @@
-using Pkg
+import Pkg
 # unregistered
-Pkg.add(PackageSpec(;url="https://github.com/korbinian90/CLEARSWI.jl"))
+Pkg.activate("..")
+Pkg.add(Pkg.PackageSpec(;url="https://github.com/korbinian90/CLEARSWI.jl"))
