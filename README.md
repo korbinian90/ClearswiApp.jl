@@ -24,6 +24,7 @@ Please cite [CLEAR-SWI NeuroImage](https://doi.org/10.1016/j.neuroimage.2021.118
    ```julia
    julia> ] # Be sure to type the closing bracket via the keyboard
    # Enters the Julia package manager
+   (@v1.5) pkg> add https://github.com/korbinian90/CLEARSWI.jl
    (@v1.5) pkg> add https://github.com/korbinian90/ClearswiApp.jl
    # All dependencies are installed automatically
    ```
