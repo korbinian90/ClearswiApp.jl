@@ -126,13 +126,13 @@ end
 
 function saveconfiguration(writedir, settings, args, version)
     writedir = abspath(writedir)
-    open(joinpath(writedir, "settings_romeo.txt"), "w") do io
+    open(joinpath(writedir, "settings_clearswi.txt"), "w") do io
         for (fname, val) in settings
             if !(typeof(val) <: AbstractArray)
                 println(io, "$fname: " * string(val))
             end
         end
         println(io, """Arguments: $(join(args, " "))""")
-        println(io, "RomeoApp version: $version")
+        println(io, "ClearswiApp version: $version")
     end
 end
