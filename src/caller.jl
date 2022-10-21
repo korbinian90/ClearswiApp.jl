@@ -1,5 +1,5 @@
 function clearswi_main(args)
-    version = "1.2.1"
+    version = "1.3.0"
 
     settings = getargs(args, version)
     if isnothing(settings) return end
@@ -79,12 +79,13 @@ function clearswi_main(args)
                         error("The setting for mag-softplus-scaling is not valid: $(settings["mag-softplus-scaling"])")
                     end
     phase_unwrap = Symbol(settings["unwrapping-algorithm"])
-    phase_hp_σ = eval(Meta.parse(join(settings["filter-size"], " ")))
+    phase_hp_sigma = eval(Meta.parse(join(settings["filter-size"], " ")))
     phase_scaling_type = Symbol(settings["phase-scaling-type"])
     phase_scaling_strength = try parse(Int, settings["phase-scaling-strength"]) catch; parse(Float32, settings["phase-scaling-strength"]) end
     writesteps = settings["writesteps"]
+    qsm = settings["qsm"]
 
-    options = Options(;mag_combine, mag_sens, mag_softplus, phase_unwrap, phase_hp_σ, phase_scaling_type, phase_scaling_strength, writesteps)
+    options = Options(;mag_combine, mag_sens, mag_softplus, phase_unwrap, phase_hp_sigma, phase_scaling_type, phase_scaling_strength, writesteps, qsm)
 
     swi = calculateSWI(data, options)
     mip = createIntensityProjection(swi, minimum)

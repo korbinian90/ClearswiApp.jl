@@ -20,6 +20,10 @@ function getargs(args::AbstractVector, version)
                 specified in array or range syntax (eg. "[1.5,3.0]" or 
                 "3.5:3.5:14")."""
             nargs = '+'
+        "--qsm"
+            help = """When activated uses QSM for phase weighting
+            """
+            action = :store_true
         "--mag-combine"
             help = """SNR | average | echo <n> | SE <te>.
                 Magnitude combination algorithm. echo <n> selects a specific
