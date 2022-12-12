@@ -1,6 +1,4 @@
-function clearswi_main(args)
-    version = "1.3.0"
-
+function clearswi_main(args; version="1.3")
     settings = getargs(args, version)
     if isnothing(settings) return end
     
