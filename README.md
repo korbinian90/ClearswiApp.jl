@@ -1,5 +1,10 @@
-# ClearswiApp
+# ClearswiApp [deprecated]
+The functionality has moved to [CLEARSWI.jl as an extension](https://github.com/korbinian90/CLEARSWI.jl).
 
+New usage explanation:
+https://github.com/korbinian90/CLEARSWI.jl#usage---command-line-via-julia
+
+---------------
 [![Build Status](https://github.com/korbinian90/ClearswiApp.jl/workflows/CI/badge.svg)](https://github.com/korbinian90/ClearswiApp.jl/actions)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/korbinian90/ClearswiApp.jl?svg=true)](https://ci.appveyor.com/project/korbinian90/ClearswiApp-jl)
 [![Coverage](https://codecov.io/gh/korbinian90/ClearswiApp.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/korbinian90/ClearswiApp.jl)
